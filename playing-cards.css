@@ -1,0 +1,225 @@
+.playing-card
+{
+    width: 88px;
+    height: 117px;
+    margin: 5px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-image: url('cards.png');
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.3);
+}
+
+.card-ac
+{
+    background-position: 0 0;
+}
+.card-as
+{
+    background-position: 0 -117px;
+}
+.card-ah
+{
+    background-position: 0 -234px;
+}
+.card-ad
+{
+    background-position: 0 -351px;
+}
+.card-2c
+{
+    background-position: -87px 0;
+}
+.card-2s
+{
+    background-position: -87px -117px;
+}
+.card-2h
+{
+    background-position: -87px -234px;
+}
+.card-2d
+{
+    background-position: -87px -351px;
+}
+.card-3c
+{
+    background-position: -175px 0;
+}
+.card-3s
+{
+    background-position: -175px -117px;
+}
+.card-3h
+{
+    background-position: -175px -234px;
+}
+.card-3d
+{
+    background-position: -175px -351px;
+}
+.card-4c
+{
+    background-position: -261px 0;
+}
+.card-4s
+{
+    background-position: -261px -117px;
+}
+.card-4h
+{
+    background-position: -261px -234px;
+}
+.card-4d
+{
+    background-position: -261px -351px;
+}
+.card-5c
+{
+    background-position: -348px 0;
+}
+.card-5s
+{
+    background-position: -348px -117px;
+}
+.card-5h
+{
+    background-position: -348px -234px;
+}
+.card-5d
+{
+    background-position: -348px -351px;
+}
+.card-6c
+{
+    background-position: -437px 0;
+}
+.card-6s
+{
+    background-position: -437px -117px;
+}
+.card-6h
+{
+    background-position: -437px -234px;
+}
+.card-6d
+{
+    background-position: -437px -351px;
+}
+.card-7c
+{
+    background-position: -525px 0;
+}
+.card-7s
+{
+    background-position: -525px -117px;
+}
+.card-7h
+{
+    background-position: -525px -234px;
+}
+.card-7d
+{
+    background-position: -525px -351px;
+}
+.card-8c
+{
+    background-position: -613px 0;
+}
+.card-8s
+{
+    background-position: -613px -117px;
+}
+.card-8h
+{
+    background-position: -613px -234px;
+}
+.card-8d
+{
+    background-position: -613px -351px;
+}
+.card-9c
+{
+    background-position: -700px 0;
+}
+.card-9s
+{
+    background-position: -700px -117px;
+}
+.card-9h
+{
+    background-position: -700px -234px;
+}
+.card-9d
+{
+    background-position: -700px -351px;
+}
+.card-10c
+{
+    background-position: -788px 0;
+}
+.card-10s
+{
+    background-position: -788px -117px;
+}
+.card-10h
+{
+    background-position: -788px -234px;
+}
+.card-10d
+{
+    background-position: -788px -351px;
+}
+.card-jc
+{
+    background-position: -875px 0;
+}
+.card-js
+{
+    background-position: -875px -117px;
+}
+.card-jh
+{
+    background-position: -875px -234px;
+}
+.card-jd
+{
+    background-position: -875px -351px;
+}
+.card-qc
+{
+    background-position: -962px 0;
+}
+.card-qs
+{
+    background-position: -962px -117px;
+}
+.card-qh
+{
+    background-position: -962px -234px;
+}
+.card-qd
+{
+    background-position: -962px -351px;
+}
+.card-kc
+{
+    background-position: -1050px 0;
+}
+.card-ks
+{
+    background-position: -1050px -117px;
+}
+.card-kh
+{
+    background-position: -1050px -234px;
+}
+.card-kd
+{
+    background-position: -1050px -351px;
+}
+
+.playing-card-facedown
+{
+    background-image: url('cardback.png');
+    background-position: 0 0;
+}
