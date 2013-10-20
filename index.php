@@ -24,6 +24,8 @@
 require_once('Card.php');
 require_once('Deck.php');
 require_once('Shoe.php');
+require_once('Table.php');
+require_once('Player.php');
 
 
 
@@ -62,6 +64,34 @@ echo '<p>'.$shoe->getCardsRemaining().' Cards remaining.<br />Reshuffling deck.<
 $shoe->resetShoe();
 $card = $shoe->dealCard();
 echo $card->getJson().'</p>';
+
+
+
+
+/*
+ *  You can create players and add them to a table
+ */
+
+$p1 = new \PlayingCards\Player(1);
+$p2 = new \PlayingCards\Player(2);
+$p3 = new \PlayingCards\Player(3);
+$p4 = new \PlayingCards\Player(4);
+
+$p1->addChips(200);
+$p2->addChips(79);
+$p3->addChips(123);
+$p4->addChips(166);
+
+$players = array(
+    $p1,$p2,$p3,$p4
+);
+
+$table = new \PlayingCards\Table($shoe,$players);
+
+/**
+ * @todo Fully test Player Object
+ * @todo Fully test Table Objects
+ */
 
 ?>
 

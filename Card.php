@@ -149,4 +149,16 @@ class Card
     {
         $this->facedown = false;
     }
+
+    /**
+     * @return bool
+     */
+    public function isFaceDown()
+    {
+        if($this->facedown == true)
+        {
+            return true;
+        }
+        return false;
+    }
 }
