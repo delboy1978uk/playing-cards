@@ -16,12 +16,33 @@ class Card
     protected $value_text;
     protected $facedown = false;
 
-    public function __construct($suit, $value,$suit_text,$value_text)
+    public function __construct($suit, $value)
     {
+        $suits = array(
+            'H' => 'Hearts',
+            'C' => 'Clubs',
+            'D' => 'Diamonds',
+            'S' => 'Spades'
+        );
+        $values = array(
+            'A' => 'Ace',
+            '2' => 'Two',
+            '3' => 'Three',
+            '4' => 'Four',
+            '5' => 'Five',
+            '6' => 'Six',
+            '7' => 'Seven',
+            '8' => 'Eight',
+            '9' => 'Nine',
+            '10' => 'Ten',
+            'J' => 'Jack',
+            'Q' => 'Queen',
+            'K' => 'King'
+        );
         $this->suit = $suit;
         $this->value = $value;
-        $this->suit_text = $suit_text;
-        $this->value_text = $value_text;
+        $this->suit_text = $suits[$suit];
+        $this->value_text = $values[$value];
     }
 
     /**

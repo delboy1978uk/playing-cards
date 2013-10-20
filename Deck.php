@@ -22,31 +22,16 @@ class Deck
     {
         $this->cards = array();
         $suits = array(
-            'H' => 'Hearts',
-            'C' => 'Clubs',
-            'D' => 'Diamonds',
-            'S' => 'Spades'
+            'H','C','D','S'
         );
         $values = array(
-            'A' => 'Ace',
-            '2' => 'Two',
-            '3' => 'Three',
-            '4' => 'Four',
-            '5' => 'Five',
-            '6' => 'Six',
-            '7' => 'Seven',
-            '8' => 'Eight',
-            '9' => 'Nine',
-            '10' => 'Ten',
-            'J' => 'Jack',
-            'Q' => 'Queen',
-            'K' => 'King'
+            'A','2','3','4','5','6','7','8','9','10','J','Q','K'
         );
-        foreach($suits as $suit => $suit_text)
+        foreach($suits as $suit)
         {
-            foreach($values as $value => $value_text)
+            foreach($values as $value)
             {
-                $card = new Card($suit,$value, $suit_text, $value_text);
+                $card = new Card($suit,$value);
                 array_push($this->cards,$card);
             }
         }
