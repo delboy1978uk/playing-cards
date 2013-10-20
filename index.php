@@ -88,9 +88,12 @@ $players = array(
 
 $table = new \PlayingCards\Table($shoe,$players);
 
+$current_player = $table->getFirstPlayer();
+$card = $table->getShoe()->dealCard();
+$current_player->addCard($card);
+
 /**
- * @todo Fully test Player Object
- * @todo Fully test Table Objects
+ * @todo still to test all table and player functionality
  */
 
 ?>

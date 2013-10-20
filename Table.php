@@ -73,6 +73,20 @@ class Table
         $this->shoe = $shoe;
     }
 
+    /**
+     * @return Shoe
+     */
+    public function getShoe()
+    {
+        return $this->shoe;
+    }
+
+
+    public function getFirstPlayer()
+    {
+        $this->players->getIterator()->rewind();
+        return $this->players->getIterator()->current();
+    }
 
     /**
      * @return Player
