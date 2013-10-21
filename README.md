@@ -34,8 +34,6 @@ public function getJson();<br />
 The Player
 ----------
 
-Still unused and needing testing so far<br />
-&nbsp;<br />
 public function __construct($id);<br />
 public function getID();<br />
 public function addCard(Card $card);<br />
@@ -47,8 +45,6 @@ public function getBalance();<br />
 The Table
 ---------
 
-Again, in development and untested so far. <br />
-&nbsp;<br />
 public function __construct(Shoe $shoe, array $players);<br />
 public function addPlayer(Player $player);<br />
 public function removePlayer($id);<br />
