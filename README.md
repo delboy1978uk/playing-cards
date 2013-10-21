@@ -52,10 +52,10 @@ Again, in development and untested so far. <br />
 public function __construct(Shoe $shoe, array $players);<br />
 public function addPlayer(Player $player);<br />
 public function removePlayer($id);<br />
-public function getPlayers();<br />
+public function getPlayers(); //returns an array object with iterator<br />
+public function getNumPlayers();<br />
+public function getBanker();
 public function setShoe(Shoe $shoe);<br />
-public function getFirstPlayer();<br />
-public function getNextPlayer();<br />
 public function addToPot($amount);<br />
 public function removeFromPot($amount);<br />
 public function getPotBalance();<br />

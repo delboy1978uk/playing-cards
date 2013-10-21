@@ -12,6 +12,7 @@ class Table
 {
     protected $shoe;
     protected $players;
+    protected $banker;
     protected $pot;
 
     /**
@@ -26,6 +27,7 @@ class Table
         {
             $this->addPlayer($player);
         }
+        $this->banker = new Banker();
         $this->pot = 0;
     }
 
@@ -45,14 +47,18 @@ class Table
      */
     public function removePlayer($id)
     {
-        while($this->players->getIterator()->valid())
+        $x = 0;
+        $i = $this->players->getIterator();
+        while($i->valid())
         {
-            if($this->players->getIterator()->current()->getID() == $id)
+            if($i->current()->getID() == $id)
             {
-                $this->players->offsetUnset($this->players->getIterator()->current());
+                $i->offsetUnset($x);
             }
+            $i->next();
+            $x++;
         }
-        $this->players->getIterator()->rewind();
+        $i->rewind();
     }
 
 
@@ -62,6 +68,19 @@ class Table
     public function getPlayers()
     {
         return $this->players;
+    }
+
+    /**
+     * @return Banker
+     */
+    public function getBanker()
+    {
+        return $this->banker;
+    }
+
+    public function getNumPlayers()
+    {
+        return $this->players->count();
     }
 
 
@@ -82,28 +101,6 @@ class Table
     }
 
 
-    public function getFirstPlayer()
-    {
-        $this->players->getIterator()->rewind();
-        return $this->players->getIterator()->current();
-    }
-
-    /**
-     * @return Player
-     */
-    public function getNextPlayer()
-    {
-        $this->players->getIterator()->next();
-        if($this->players->getIterator()->valid())
-        {
-            return $this->players->getIterator()->current();
-        }
-        else
-        {
-            $this->players->getIterator()->rewind();
-            return $this->players->getIterator()->current();
-        }
-    }
 
     /**
      * @param $amount

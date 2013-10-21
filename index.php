@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="playing-cards.css" />
-<script type="text/javascript" src="../inc/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 <style>
     body
     {
@@ -69,8 +70,13 @@ echo $card->getJson().'</p>';
 
 
 /*
+ *  You get the idea! Lets start a fake game of blackjack
  *  You can create players and add them to a table
  */
+
+// Blackjack uses 6 decks
+$shoe = new PlayingCards\Shoe(6);
+$shoe->shuffleDeck();
 
 $p1 = new \PlayingCards\Player(1);
 $p2 = new \PlayingCards\Player(2);
@@ -88,13 +94,44 @@ $players = array(
 
 $table = new \PlayingCards\Table($shoe,$players);
 
-$current_player = $table->getFirstPlayer();
-$card = $table->getShoe()->dealCard();
-$current_player->addCard($card);
+//dish out two cards to each player
+for($x = 1; $x<=2; $x++)
+{
+    $players = $table->getPlayers()->getIterator();
+    while($players->valid())
+    {
+        /** @var \PlayingCards\Player $player  */
+        $player = $players->current();
+        $player->addCard($shoe->dealCard());
+        $players->next();
+    }
+    $table->getPlayers()->getIterator()->rewind();
+}
+$players = $table->getPlayers()->getIterator();
 
-/**
- * @todo still to test all table and player functionality
- */
+for($x = 0; $x < $table->getNumPlayers(); $x++)
+{
+    /** @var \PlayingCards\Player $player  */
+    $player = $players->current();
+    $cards = $player->getCards()->getIterator();
+    /** @var \PlayingCards\Card $card */
+    $card = $cards->current();
+    echo '<h3>Player '.$player->getID().'</h3>';
+    echo '<li>'.$card->getHtml().'<li>';
+    $cards->next();
+    /** @var \PlayingCards\Card $card */
+    $card = $cards->current();
+    echo '<li>'.$card->getHtml().'</li>';
+    $players->next();
+
+}
+$players->rewind();
+//testing removing a player (no chips left)
+echo $players->current()->getBalance().'<br />';
+echo $players->current()->removeChips(200).'<br />';
+$table->removePlayer($players->current()->getID());
+var_dump($table->getPlayers());
+
 
 ?>
 
@@ -104,7 +141,8 @@ $current_player->addCard($card);
 <script type="text/javascript">
     $(document).ready(function(){
 
-        //clicking on a card to make it face down or face up
+        /* clicking on a card to make it face down or face up
+
 
         $('li').click(function(){
             if($(this).find('div').hasClass('playing-card-facedown'))
@@ -116,5 +154,9 @@ $current_player->addCard($card);
                 $(this).find('div').addClass('playing-card-facedown');
             }
         });
+        */
+
+
+        $('li').draggable();
     });
 </script>

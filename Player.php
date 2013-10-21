@@ -20,7 +20,7 @@ class Player
     public function __construct($id)
     {
         $this->id = $id;
-        $this->cards = array();
+        $this->cards = new \ArrayObject();
         $this->chips = 0;
     }
 
@@ -34,7 +34,12 @@ class Player
      */
     public function addCard(Card $card)
     {
-        array_push($this->cards,$card);
+        $this->cards->append($card);
+    }
+
+    public function getCards()
+    {
+        return $this->cards;
     }
 
     /**
