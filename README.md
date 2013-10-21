@@ -54,7 +54,7 @@ public function addPlayer(Player $player);<br />
 public function removePlayer($id);<br />
 public function getPlayers(); //returns an array object with iterator<br />
 public function getNumPlayers();<br />
-public function getBanker();
+public function getBanker();<br />
 public function setShoe(Shoe $shoe);<br />
 public function addToPot($amount);<br />
 public function removeFromPot($amount);<br />
