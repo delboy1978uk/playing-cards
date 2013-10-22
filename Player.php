@@ -10,9 +10,10 @@ namespace PlayingCards;
 
 class Player
 {
-    protected $id;
-    protected $cards;
-    protected $chips;
+    private $id;
+    private $cards;
+    private $chips;
+
 
     /**
      * @param $id
@@ -93,4 +94,13 @@ class Player
     {
         return $this->chips;
     }
+
+    protected function fundsCheck($amount)
+    {
+        if($amount > $this->getBalance())
+        {
+            throw new \Exception('Not enough chips');
+        }
+    }
+
 }

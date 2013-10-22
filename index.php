@@ -6,7 +6,7 @@
     {
         background-color: #005500;
     }
-    li
+    li, div.playing-card
     {
         float:left;
     }
@@ -27,6 +27,11 @@ require_once('Deck.php');
 require_once('Shoe.php');
 require_once('Table.php');
 require_once('Player.php');
+require_once('Banker.php');
+require_once('Games/CardGame.php');
+require_once('Games/Baccarat.php');
+require_once('Games/Baccarat/Player.php');
+require_once('Games/Baccarat/Hand.php');
 
 
 
@@ -70,18 +75,16 @@ echo $card->getJson().'</p>';
 
 
 /*
- *  You get the idea! Lets start a fake game of blackjack
+ *  You get the idea! Lets start a fake game of baccarat
  *  You can create players and add them to a table
  */
 
-// Blackjack uses 6 decks
-$shoe = new PlayingCards\Shoe(6);
-$shoe->shuffleDeck();
+echo '<h2>Baccarrat</h2>';
 
-$p1 = new \PlayingCards\Player(1);
-$p2 = new \PlayingCards\Player(2);
-$p3 = new \PlayingCards\Player(3);
-$p4 = new \PlayingCards\Player(4);
+$p1 = new \PlayingCards\Games\Baccarat\Player(1);
+$p2 = new \PlayingCards\Games\Baccarat\Player(2);
+$p3 = new \PlayingCards\Games\Baccarat\Player(3);
+$p4 = new \PlayingCards\Games\Baccarat\Player(4);
 
 $p1->addChips(200);
 $p2->addChips(79);
@@ -92,46 +95,63 @@ $players = array(
     $p1,$p2,$p3,$p4
 );
 
-$table = new \PlayingCards\Table($shoe,$players);
+$baccarat = new PlayingCards\Games\Baccarat($players);
 
-//dish out two cards to each player
-for($x = 1; $x<=2; $x++)
+$baccarat->dealInitialCards();
+
+$players = $baccarat->getTable()->getPlayers()->getIterator();
+
+//place a bet
+while($players->valid())
 {
-    $players = $table->getPlayers()->getIterator();
-    while($players->valid())
+    $choice = rand(1,3);
+    $bet = rand(5,(round($players->current()->getBalance()/5)));
+    echo 'Player '.$players->current()->getID().'('.$players->current()->getBalance().' BTC) bets '.$bet.' BTC on ';
+    switch($choice)
     {
-        /** @var \PlayingCards\Player $player  */
-        $player = $players->current();
-        $player->addCard($shoe->dealCard());
-        $players->next();
+        case 1:
+            $players->current()->placePlayerBet($bet);
+            echo 'himself.<br />';
+            break;
+        case 2:
+            $players->current()->placeBankerBet($bet);
+            echo 'the Banker.<br />';
+            break;
+        case 3:
+            $players->current()->placeTieBet($bet);
+            echo 'a Tie.<br />';
+            break;
     }
-    $table->getPlayers()->getIterator()->rewind();
+    $players->next();
 }
-$players = $table->getPlayers()->getIterator();
+$players->rewind();
 
-for($x = 0; $x < $table->getNumPlayers(); $x++)
+
+for($x = 0; $x < $baccarat->getTable()->getNumPlayers(); $x++)
 {
     /** @var \PlayingCards\Player $player  */
     $player = $players->current();
     $cards = $player->getCards()->getIterator();
     /** @var \PlayingCards\Card $card */
     $card = $cards->current();
-    echo '<h3>Player '.$player->getID().'</h3>';
-    echo '<li>'.$card->getHtml().'<li>';
+    echo '<li><h3>Player '.$player->getID().'</h3>';
+    echo 'Score: '.$baccarat->evaluateHand($player).'<br />';
+    echo $card->getHtml();
     $cards->next();
     /** @var \PlayingCards\Card $card */
     $card = $cards->current();
-    echo '<li>'.$card->getHtml().'</li>';
+    echo $card->getHtml().'</li><li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>';
     $players->next();
 
 }
 $players->rewind();
-//testing removing a player (no chips left)
-echo $players->current()->getBalance().'<br />';
-echo $players->current()->removeChips(200).'<br />';
-$table->removePlayer($players->current()->getID());
-var_dump($table->getPlayers());
 
+echo '<li><h3>Banker</h3>';
+echo 'Score: '.$baccarat->evaluateHand($baccarat->getTable()->getBanker()).'<br />';
+$cards = $baccarat->getTable()->getBanker()->getCards()->getIterator();
+echo $cards->current()->getHtml();
+$cards->next();
+echo $cards->current()->getHtml().'</li>';
 
 ?>
 

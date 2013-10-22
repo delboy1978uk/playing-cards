@@ -9,52 +9,53 @@ PHP objects for playing card games. Create a card shoe and specify how many deck
 The Shoe
 --------
 
-public function __construct($decks);<br />
-public function dealCard();<br />
-public function discardCard(Card $card)<br />
-public function shuffleDeck();<br />
-public function getCardsRemaining();<br />
-public function resetShoe();<br />
+__construct($decks);<br />
+dealCard();<br />
+discardCard(Card $card)<br />
+shuffleDeck();<br />
+getCardsRemaining();<br />
+resetShoe();<br />
 
 The Card
 --------
 
-public function getSuit(); // eg. C, S, D, or H <br />
-public function getValue(); // eg. A, K, Q, J, 10, 9, etc<br />
-public function getAsText(); // eg. Ace of Spades<br />
-public function getSuitAsText();<br />
-public function getValueAsText();<br />
-public function flipCard(); // toggles crd face up or face down
-public function flipFaceDown();<br />
-public function flipFaceUp();<br />
-public function isFaceDown();<br />
-public function getHtml($id = null)<br />
-public function getJson();<br />
+getSuit(); // eg. C, S, D, or H <br />
+getValue(); // eg. A, K, Q, J, 10, 9, etc<br />
+getAsText(); // eg. Ace of Spades<br />
+getSuitAsText();<br />
+getValueAsText();<br />
+flipCard(); // toggles crd face up or face down
+flipFaceDown();<br />
+flipFaceUp();<br />
+isFaceDown();<br />
+getHtml($id = null)<br />
+getJson();<br />
 
 The Player
 ----------
 
-public function __construct($id);<br />
-public function getID();<br />
-public function addCard(Card $card);<br />
-public function removeCard($cardval); // The card as a shorthand string ie 10D<br />
-public function addChips($amount);<br />
-public function removeChips($amount);<br />
-public function getBalance();<br />
+__construct($id);<br />
+getID();<br />
+addCard(Card $card);<br />
+removeCard($cardval); // The card as a shorthand string ie 10D<br />
+addChips($amount);<br />
+removeChips($amount);<br />
+getBalance();<br />
+
 
 The Table
 ---------
 
-public function __construct(Shoe $shoe, array $players);<br />
-public function addPlayer(Player $player);<br />
-public function removePlayer($id);<br />
-public function getPlayers(); //returns an array object with iterator<br />
-public function getNumPlayers();<br />
-public function getBanker();<br />
-public function setShoe(Shoe $shoe);<br />
-public function addToPot($amount);<br />
-public function removeFromPot($amount);<br />
-public function getPotBalance();<br />
+__construct(Shoe $shoe, array $players);<br />
+addPlayer(Player $player);<br />
+removePlayer($id);<br />
+getPlayers(); //returns an array object with iterator<br />
+getNumPlayers();<br />
+getBanker();<br />
+setShoe(Shoe $shoe);<br />
+addToPot($amount);<br />
+removeFromPot($amount);<br />
+getPotBalance();<br />
 
 
 
