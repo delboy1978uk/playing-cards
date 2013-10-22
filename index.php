@@ -127,31 +127,43 @@ while($players->valid())
 $players->rewind();
 
 
-for($x = 0; $x < $baccarat->getTable()->getNumPlayers(); $x++)
-{
-    /** @var \PlayingCards\Player $player  */
-    $player = $players->current();
-    $cards = $player->getCards()->getIterator();
-    /** @var \PlayingCards\Card $card */
-    $card = $cards->current();
-    echo '<li><h3>Player '.$player->getID().'</h3>';
-    echo 'Score: '.$baccarat->evaluateHand($player).'<br />';
-    echo $card->getHtml();
-    $cards->next();
-    /** @var \PlayingCards\Card $card */
-    $card = $cards->current();
-    echo $card->getHtml().'</li><li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>';
-    $players->next();
 
-}
-$players->rewind();
+echo '<li><h3>Punto</h3>';
+echo 'Score: '.$baccarat->evaluateHand($baccarat->getPunto()).'<br />';
+$cards = $baccarat->getPunto()->getCards()->getIterator();
+echo $cards->current()->getHtml();
+$cards->next();
+echo $cards->current()->getHtml().'</li><li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>';
 
-echo '<li><h3>Banker</h3>';
+
+echo '<li><h3>Banco</h3>';
 echo 'Score: '.$baccarat->evaluateHand($baccarat->getTable()->getBanker()).'<br />';
 $cards = $baccarat->getTable()->getBanker()->getCards()->getIterator();
 echo $cards->current()->getHtml();
 $cards->next();
 echo $cards->current()->getHtml().'</li>';
+
+//deal the third cards if necessary
+$baccarat->dealThirdCards();
+
+
+echo '<br />Final result:<br />';
+echo '<li><h3>Punto</h3>';
+echo 'Score: '.$baccarat->evaluateHand($baccarat->getPunto()).'<br />';
+foreach($baccarat->getPunto()->getCards() as $card)
+{
+    echo $card->getHtml();
+}
+echo '</li><li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>';
+
+
+echo '<li><h3>Banco</h3>';
+echo 'Score: '.$baccarat->evaluateHand($baccarat->getTable()->getBanker()).'<br />';
+foreach($baccarat->getBanco()->getCards() as $card)
+{
+    echo $card->getHtml();
+}
+echo '</li>';
 
 ?>
 
